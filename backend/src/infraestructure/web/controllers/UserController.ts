@@ -3,12 +3,14 @@ import { GetUserById } from "../../../application/use-cases/GetUserById";
 import { SaveUser } from "../../../application/use-cases/SaveUser";
 import { Request, Response } from "express";
 import { JwtService } from "../../security/JwtService";
+import { verification } from "../../../domain/logic/verification";
 
 export class UserController {
     constructor(
         private readonly saveUser: SaveUser,
         private readonly getUserById: GetUserById,
-        private readonly getUserByEmail: Login
+        private readonly getUserByEmail: Login,
+        private readonly jwtService: JwtService
     ) { }
 
     save = async (req: Request, res: Response) => {
@@ -22,15 +24,8 @@ export class UserController {
     
             const user = await this.saveUser.execute({ name, email, password })
             if (!user) return res.status(500).send({ error: "No se pudo crear el usuario" })
-            
-            const token = JwtService.generateToken({sub: user.id?.toString(), name: user.name, email: user.email})
-    
-            res.cookie('access_token', token, {
-                httpOnly: true,
-                secure: false,
-                samesite: 'none',
-                maxAge: 1000 * 60 * 60,
-            })
+
+            verification(req, res, user, this.jwtService);
             
             return res.status(201).json(user)
         } catch (error: any) {
@@ -60,7 +55,7 @@ export class UserController {
             const user = await this.getUserByEmail.execute(email, password)
             if (!user) return res.status(404).send({ error: `No se encontró un usuario con este email: ${email}` })
 
-            
+            verification(req, res, user, this.jwtService);
 
             return res.status(201).json(user)
         } catch (error: any) {

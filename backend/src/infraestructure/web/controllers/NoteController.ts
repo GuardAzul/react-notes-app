@@ -17,9 +17,9 @@ export class NoteController {
             if (!req.body) return res.status(400).json({ error: "Missing note data" })
 
             const note = req.body;
-            const userId = req.params.id;
+            const userId = req.userId;
             if(!userId) return res.status(400).json({ error: "No valid User" });
-            const result = this.createNote.execute(note, +userId)
+            const result = await this.createNote.execute(note, +userId)
             return res.status(200).json(result)
         } 
         catch (error: any) {
@@ -32,7 +32,7 @@ export class NoteController {
             const noteId = req.params.id;
             if(!noteId) return res.status(400).json({ error: "No valid ID"})
             
-            const result = this.getNoteById.execute(+noteId);
+            const result = await this.getNoteById.execute(+noteId);
             if(!result) return res.status(404).json({ error: "Note not found" });
 
             return res.status(200).json(result);
@@ -43,10 +43,10 @@ export class NoteController {
 
     getNotes = async (req: Request, res: Response) => {
         try {
-            const userId = req.params.id;
+            const userId = req.userId;
             if(!userId) return res.status(400).json({ error: "No valid User" });
             
-            const result = this.getNotesByUserId.execute(+userId);
+            const result = await this.getNotesByUserId.execute(+userId);
 
             return res.status(200).json(result);
         } catch(error: any) {

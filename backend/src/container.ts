@@ -9,13 +9,18 @@ import { SequelizeUserRepository } from "./infraestructure/db/SequelizeUserRepos
 import { NoteController } from "./infraestructure/web/controllers/NoteController";
 import { UserController } from "./infraestructure/web/controllers/UserController";
 import { DeleteNote } from "./application/use-cases/DeleteNote";
+import { JwtService } from "./infraestructure/security/JwtService";
+import { AuthMiddleware } from "./infraestructure/security/AuthMiddleWare";
 
 // Repositorries
 const userRepository = new SequelizeUserRepository();
 const noteRepository = new SequelizeNoteRepository();
 
 // services
+const jwtService = new JwtService();
 
+// middleware
+const authMiddleware = new AuthMiddleware(jwtService);
 
 // uses-cases
 const saveUser = new SaveUser(userRepository);
@@ -29,9 +34,10 @@ const deleteNote = new DeleteNote(noteRepository);
 
 // controllers
 const noteController = new NoteController(createNote, getNoteById, getNotesByUserId, deleteNote);
-const userController = new UserController(saveUser, getUserById, getUserByEmail);
+const userController = new UserController(saveUser, getUserById, getUserByEmail, jwtService);
 
 export {
     userController,
-    noteController 
+    noteController ,
+    authMiddleware
 }

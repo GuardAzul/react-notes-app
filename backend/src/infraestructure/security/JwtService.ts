@@ -3,7 +3,7 @@ import jwt, { SignOptions, VerifyOptions, JwtPayload } from 'jsonwebtoken';
 
 dtoenv.config();
 
-const JWT_SECRET = process.env.JWT_SECRET || "c6557d1e51e7a07cbcc35e317b71a4a1a784dc7f253883aacdc57ddb917526f1";
+const JWT_SECRET = process.env.JWT_SECRET || "dev-secret";
 
 const defaultSignOptions: SignOptions = {
     algorithm: 'HS256',
