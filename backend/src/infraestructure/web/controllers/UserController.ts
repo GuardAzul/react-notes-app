@@ -62,4 +62,23 @@ export class UserController {
             return res.status(500).send({ error: error.message })
         }
     }
+
+    verify = async (req: Request, res: Response) => {
+        try {
+            // Si el middleware de autenticación permitió llegar aquí, el usuario está autenticado
+            return res.status(200).json({
+                authenticated: true, userId: req.userId });
+        } catch(err: any) {
+            return res.status(401).json({authenticated: false, error: err.message });
+        }
+    }
+
+    logout = async (_req: Request, res: Response) => {
+        try {
+            res.clearCookie('access_token');
+            return res.status(200).json({ message: 'Sesión cerrada correctamente' })
+        } catch(err: any) {
+            return res.status(500).json({ error: err.message });
+        }
+    }
 }
