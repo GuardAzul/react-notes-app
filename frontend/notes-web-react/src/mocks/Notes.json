@@ -1,0 +1,22 @@
+{
+    "Notas": [
+        {
+            "id": 1,
+            "title": "Nota 1",
+            "Content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "userId": 1
+        },
+        {
+            "id": 2,
+            "title": "Nota 2",
+            "Content": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "userId": 1
+        },
+        {
+            "id": 3,
+            "title": "Nota 3",
+            "content": "Nota 3 de que algo se está cocinando acá",
+            "userId": 2
+        }
+    ]
+}
