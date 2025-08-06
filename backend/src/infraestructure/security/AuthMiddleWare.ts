@@ -8,6 +8,7 @@ export class AuthMiddleware {
 
     authenticate = async (req: Request, res: Response, next: NextFunction) => {
         try {
+            console.log('Entrando al middleware...')
             const token = req.cookies.access_token || (req.headers.authorization?.startsWith('Bearer ') 
             ? req.headers.authorization.split(' ')[1] : null)
 

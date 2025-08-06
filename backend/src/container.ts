@@ -38,6 +38,6 @@ const userController = new UserController(saveUser, getUserById, getUserByEmail,
 
 export {
     userController,
-    noteController ,
+    noteController,
     authMiddleware
 }

@@ -65,6 +65,7 @@ export class UserController {
 
     verify = async (req: Request, res: Response) => {
         try {
+            console.log('Entrando a verify...')
             // Si el middleware de autenticación permitió llegar aquí, el usuario está autenticado
             return res.status(200).json({
                 authenticated: true, userId: req.userId });
