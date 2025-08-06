@@ -15,7 +15,7 @@ export function AuthProvider({ children }: {children: ReactNode}) {
     const checkAuth = async (): Promise<boolean> => {
         try {
             // Hacer una petición al backend para verificar si la cookie es válida
-            const response = await fetch('http://localhost:3000/api/user/verify', {
+            const response = await fetch('http://localhost:3000/api/user/auth/verify', {
                 method: 'GET',
                 credentials: 'include', // Importante para enviar las cookies
             });

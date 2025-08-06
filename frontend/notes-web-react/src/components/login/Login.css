@@ -41,3 +41,17 @@
     color: black;
     font-size: 1rem;
 }
+
+.errorMessage {
+    position: fixed;
+    text-align: left;
+    color: red;
+    font-size: 0.8rem;
+    border: 1px solid red;
+    background-color: #f8d7da;
+    border-radius: 32px;
+    opacity: .95;
+    backdrop-filter: blur(5px);
+    padding: 10px;
+    transform: translate(0px, -75px);
+}
