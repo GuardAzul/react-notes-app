@@ -57,8 +57,14 @@ export class UserController {
 
             verification(req, res, user, this.jwtService);
 
-            return res.status(201).json(user)
+            return res.status(200).json({
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                message: 'Login exitoso'
+            })
         } catch (error: any) {
+            console.log('Error en login:', error.message, error.status, error.statusText);
             return res.status(500).send({ error: error.message })
         }
     }
@@ -70,6 +76,7 @@ export class UserController {
             return res.status(200).json({
                 authenticated: true, userId: req.userId });
         } catch(err: any) {
+            console.log('Error en verify:', err.message);
             return res.status(401).json({authenticated: false, error: err.message });
         }
     }

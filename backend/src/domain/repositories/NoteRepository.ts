@@ -5,4 +5,6 @@ export interface NoteRepository {
     getNoteById(id: number): Promise<Note | null>;
     getNotesByUserId(userId: number): Promise<Note[] | null>;
     deleteNote(id: number): Promise<void>;
+    updateNote(noteId: number, note: Note): Promise<Note | null>;
+    getNoteByTitle(title: string): Promise<Note | null>;
 }

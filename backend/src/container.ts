@@ -11,6 +11,8 @@ import { UserController } from "./infraestructure/web/controllers/UserController
 import { DeleteNote } from "./application/use-cases/DeleteNote";
 import { JwtService } from "./infraestructure/security/JwtService";
 import { AuthMiddleware } from "./infraestructure/security/AuthMiddleWare";
+import { UpdateNote } from "./application/use-cases/UpdateNote";
+import { GetNoteByTitle } from "./application/use-cases/GetNoteByTitle";
 
 // Repositorries
 const userRepository = new SequelizeUserRepository();
@@ -31,9 +33,12 @@ const createNote = new CreateNote(noteRepository);
 const getNoteById = new GetNoteById(noteRepository);
 const getNotesByUserId = new GetNotesByUserId(noteRepository);
 const deleteNote = new DeleteNote(noteRepository);
+const updateNote = new UpdateNote(noteRepository);
+const getByTitle = new GetNoteByTitle(noteRepository)
 
 // controllers
-const noteController = new NoteController(createNote, getNoteById, getNotesByUserId, deleteNote);
+const noteController = new NoteController(createNote, getNoteById, getNotesByUserId, deleteNote, getByTitle, updateNote);
+
 const userController = new UserController(saveUser, getUserById, getUserByEmail, jwtService);
 
 export {

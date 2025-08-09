@@ -12,7 +12,7 @@ export function verification(_req: Request, res: Response, user: User, jwtServic
     res.cookie('access_token', token, {
         httpOnly: true,
         secure: false,
-        sameSite: 'none',
+        sameSite: 'lax',
         maxAge: 1000 * 60 * 60,
     })
 }

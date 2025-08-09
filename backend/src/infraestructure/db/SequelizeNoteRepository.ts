@@ -37,6 +37,36 @@ export class SequelizeNoteRepository implements NoteRepository {
         }
     }
 
+    async updateNote(noteId: number, note: Note): Promise<Note | null> {
+        try {
+            const noteUpdated = await SequelizeNoteModel.update({
+                title: note.title,
+                content: note.content,
+            }, {
+                where: {
+                    id: noteId
+                }
+            });
+            return noteUpdated[0] === 1 ? note : null;
+        } catch(err: any) {
+            throw new Error(err.message);
+        }
+    }
+
+    async getNoteByTitle(title: string): Promise<Note | null> {
+        try {
+            const note = await SequelizeNoteModel.findOne({
+                where: {
+                    title: title,
+                }
+            });
+
+            return note?.toJSON() as Note;
+        } catch(err: any) {
+            throw new Error(err.message);
+        }
+    }
+
     async deleteNote(id: number): Promise<void> {
         try {
             await SequelizeNoteModel.destroy({
