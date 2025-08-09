@@ -1,0 +1,86 @@
+h1, h2, h3, h4, p {
+    color: black;
+}
+
+.notes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  width: 100%;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.create-btn-note {
+  margin-top: 20px;
+}
+
+.note {
+  text-align: center;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.note h2, .note p {
+  color: black;
+  margin: 5px
+}
+
+.note p {
+  width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.note button {
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.note-btn-edit {
+  background-color: rgba(33, 111, 255, 0.842);
+  color: white;
+}
+
+.note-btn-delete {
+  background-color: rgba(255, 50, 50, 0.904);
+  color: black;
+
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 80%;
+  max-width: 500px;
+}
+
+.popup-content h2 {
+  color: black;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}

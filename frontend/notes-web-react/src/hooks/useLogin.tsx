@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { User, UserResponse } from "../interfaces/User";
 import { loginService } from "../services/loginService";
 
+
 export function useLogin() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>();
@@ -22,7 +23,7 @@ export function useLogin() {
 
             return response;
         } catch(err: any) {
-            setError(err.message || 'Error al iniciar sesión');
+            setError(`Error al iniciar sesión, código: ${err.status}: ${err.statusText}, mensaje: ${err.message}`);
             return null;
         } finally {
             setIsLoading(false);

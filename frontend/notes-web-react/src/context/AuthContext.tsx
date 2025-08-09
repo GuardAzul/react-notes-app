@@ -24,6 +24,7 @@ export function AuthProvider({ children }: {children: ReactNode}) {
             setIsAuthenticated(isAuth);
             return isAuth;
         } catch(err: any) {
+            console.log(`Error al verificar autenticación: ${err.message}`);
             setIsAuthenticated(false);
             return false;
         }

@@ -9,16 +9,18 @@ export const loginService = async (user: User) => {
             body: JSON.stringify(user),
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: 'include',
         });
 
-        const data = await response.json();
-        if(data.Response === 'Success') {
-            return data;
-        } else {
-            throw new Error(data.Error);
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.Error || `Error desconocido: ${response.status}: ${response.statusText}`);
         }
-    } catch(error: any) {
+
+        const data = await response.json();
+        return data;
+    } catch (error: any) {
         throw new Error(`Error al inicar sesión: ${error.message}`);
     }
 
